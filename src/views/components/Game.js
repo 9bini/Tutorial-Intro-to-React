@@ -52,6 +52,7 @@ class Game extends React.Component {
                 'Go to move #' + move + ' (' + step.x + ', ' + step.y + ')' :
                 'Go to game start';
             return (
+                // 
                 <li key={move}>
                     <button 
                         onClick={() => this.jumpTo(move)}
@@ -69,6 +70,8 @@ class Game extends React.Component {
         } else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
+
+        
 
         return (
             <div className="game">

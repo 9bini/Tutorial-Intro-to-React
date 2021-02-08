@@ -4,7 +4,10 @@ import Square from "./Square.js";
 class Board extends React.Component {
   renderSquare(i) {
     return (
+
       <Square
+       // key={i} 를 추가한 이유: key prop을 지정하여 각 아이템이 다른 아이템들과 다르다는 것을 알려주기 위해
+        key={i}
         value={this.props.squares[i]}
         // 리엑트에서 onClick 혹은 handleClick 함수에 어떤 이름들 붙일 수 있으며 코드는
         // 코드는 동일하게 작동합니다.
@@ -16,23 +19,19 @@ class Board extends React.Component {
   }
 
   render() {
+    const squaresBox = [];
+    let count = 0;
+    for (let i = 0; i <3; i++) {
+      const squares = [];
+      for (let j = 0; j < 3; j++) {
+        squares.push(this.renderSquare(3 * i + j));
+      }
+      // key 를 추가한 이유: key prop을 지정하여 각 아이템이 다른 아이템들과 다르다는 것을 알려주기 위해
+      squaresBox.push(<div key={count++} className="board-row">{squares}</div>);
+    }
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+        {squaresBox}
       </div>
     );
   }
