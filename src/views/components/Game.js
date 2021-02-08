@@ -12,6 +12,7 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: true,
+            isAscending:true,
         };
     }
     jumpTo(step) {
@@ -42,11 +43,17 @@ class Game extends React.Component {
 
         });
     }
+    handleReverseToggle(){
+        this.setState({
+            isAscending : !this.state.isAscending
+        });
+    }
 
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares, current);
+        const isAscending = this.state.isAscending;
 
         const moves = history.map((step, move) => {
             const desc = move ?
@@ -64,6 +71,14 @@ class Game extends React.Component {
                 </li>
             );
         });
+        if(!isAscending)
+            moves.reverse();
+        const reverseButtonDesc = isAscending ? "뒤집기" : "원래대로";
+        const reverseButton = (
+          <button onClick={() => this.handleReverseToggle()}>
+              {reverseButtonDesc}
+          </button>
+      );
 
         let status = 'status| ';
         if (winner) {
@@ -88,6 +103,7 @@ class Game extends React.Component {
                 <div className="game-info">
                     <div>{status}</div>
                     <ol>{moves}</ol>
+                    <div>{reverseButton}</div>
                 </div>
             </div>
         );
