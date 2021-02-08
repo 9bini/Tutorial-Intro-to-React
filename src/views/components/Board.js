@@ -14,6 +14,7 @@ class Board extends React.Component {
         // 하지만 리액트에서는 이벤트를 나타내는 prop에는 on[even],
         // 이벤트를 처리하는 함수에는 handle[Event]를 사용하는 것이 일반적입니다.
         onClick={() => this.props.onClick(i)}
+        className={checkWinnerIndex(this.props.win, i) ? 'test' : ''}
       />
     );
   }
@@ -37,5 +38,11 @@ class Board extends React.Component {
   }
 }                
 
+function checkWinnerIndex(win, i) {
+  if (!win) return false;
+  for (let index = 0; index < win.length; index++) {
+      if(i === win[index])return true;
+  }
+}
 
 export default Board;
