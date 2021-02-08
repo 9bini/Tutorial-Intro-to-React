@@ -64,11 +64,13 @@ class Game extends React.Component {
             );
         });
 
-        let status;
+        let status = 'status| ';
         if (winner) {
-            status = 'Winner: ' + winner;
-        } else {
-            status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+            status += 'Winner: ' + winner;
+        } else if(this.state.stepNumber === 9){
+            status += 'tie';
+        }else {
+            status += 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
 
         
